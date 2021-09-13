@@ -1,6 +1,11 @@
+using IventarioDeRecursos.Data;
+using IventarioDeRecursos.Models;
+using IventarioDeRecursos.Repository;
+using IventarioDeRecursos.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,6 +28,14 @@ namespace IventarioDeRecursos
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddScoped<IRecursoService<Recurso>, RecursoService>();
+            services.AddScoped<IRecursoRepository<Recurso>, RecursoRepository>();
+            
+
+            services.AddDbContext<RecursoContext>(options =>
+  options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
+
             services.AddControllersWithViews();
         }
 
