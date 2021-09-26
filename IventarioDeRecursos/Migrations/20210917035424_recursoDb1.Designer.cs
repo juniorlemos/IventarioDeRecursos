@@ -4,14 +4,16 @@ using IventarioDeRecursos.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IventarioDeRecursos.Migrations
 {
     [DbContext(typeof(RecursoContext))]
-    partial class RecursoContextModelSnapshot : ModelSnapshot
+    [Migration("20210917035424_recursoDb1")]
+    partial class recursoDb1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,8 +23,10 @@ namespace IventarioDeRecursos.Migrations
 
             modelBuilder.Entity("IventarioDeRecursos.Models.Movimentacao", b =>
                 {
-                    b.Property<string>("Descricao")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("MovimentacaoID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DataEntrada")
                         .HasColumnType("datetime2");
@@ -30,21 +34,35 @@ namespace IventarioDeRecursos.Migrations
                     b.Property<DateTime>("DataSaida")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Descricao")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("NomeEntradaRecurso")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NomeSaidaRecurso")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Descricao");
+                    b.Property<string>("Recursoid")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MovimentacaoID");
 
                     b.ToTable("Movimentacao");
                 });
 
             modelBuilder.Entity("IventarioDeRecursos.Models.Recurso", b =>
                 {
+                    b.Property<int>("RecursoID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<string>("Descricao")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Entrada")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("NomeResponsavel")
                         .HasColumnType("nvarchar(max)");
@@ -55,7 +73,7 @@ namespace IventarioDeRecursos.Migrations
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
-                    b.HasKey("Descricao");
+                    b.HasKey("RecursoID");
 
                     b.ToTable("Recursos");
                 });

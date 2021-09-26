@@ -31,7 +31,8 @@ namespace IventarioDeRecursos
 
             services.AddScoped<IRecursoService<Recurso>, RecursoService>();
             services.AddScoped<IRecursoRepository<Recurso>, RecursoRepository>();
-            
+            services.AddScoped<IMovimentacaoRepository<Movimentacao>, MovimentacaoRepository>();
+            services.AddScoped<IMovimentacaoService<Movimentacao>, MovimentacaoService>();
 
             services.AddDbContext<RecursoContext>(options =>
   options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));

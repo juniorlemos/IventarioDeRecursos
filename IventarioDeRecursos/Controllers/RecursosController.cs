@@ -13,27 +13,30 @@ namespace IventarioDeRecursos.Controllers
 {
     public class RecursosController : Controller
     {
-        private readonly IRecursoService<Recurso> _service;
+        private readonly IRecursoService<Recurso> _serviceRecurso;
+        private readonly IMovimentacaoService<Movimentacao> _serviceMovimentacao;
 
-        public RecursosController(IRecursoService<Recurso> service)
+        public RecursosController(IRecursoService<Recurso> serviceRecurso,
+            IMovimentacaoService<Movimentacao> serviceMovimentacao)
         {
-            _service = service;
+            _serviceRecurso = serviceRecurso;
+            _serviceMovimentacao = serviceMovimentacao;
         }
 
         // GET: Recursos
         public async Task<IActionResult> Index()
         {
-            var recursos = await _service.PegarTodosOsRecursos();
+            var recursos = await _serviceRecurso.PegarTodosOsRecursos();
 
             return View(recursos);
         }
 
         // GET: Recursos/Details/5
-        public async Task<IActionResult> Details(Guid id)
+        public async Task<IActionResult> Details(string id)
         {
           
 
-            var recurso = await _service.PegarRecurso(id);
+            var recurso = await _serviceRecurso.PegarRecurso(id);
             
             if (recurso == null)
             {
@@ -52,26 +55,28 @@ namespace IventarioDeRecursos.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Descricao,Quantidade,Observacao")] Recurso recurso)
+        public async Task<IActionResult> Create([Bind("Descricao,Quantidade,Observacao,NomeResponsavel")] Recurso recurso)
         {
             if (ModelState.IsValid)
             {
-                recurso.Id = Guid.NewGuid();
+                
 
-               await _service.InserirRecurso(recurso);                
-               
+               await _serviceRecurso.InserirRecurso(recurso);
+
+                await _serviceMovimentacao.InserirMovimentacao(recurso);
+
                 return RedirectToAction(nameof(Index));
             }
             return View(recurso);
         }
 
         // GET: Recursos/Edit/5
-        public async Task<IActionResult> Edit(Guid id)
+        public async Task<IActionResult> Edit(string id)
         {
            
 
 
-            var recurso = await _service.PegarRecurso(id);
+            var recurso = await _serviceRecurso.PegarRecurso(id);
             if (recurso == null)
             {
                 return NotFound();
@@ -79,21 +84,19 @@ namespace IventarioDeRecursos.Controllers
             return View(recurso);
         }
 
-        
-        [HttpPost]
+              
+       
+     [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Descricao,Quantidade,Observacao")] Recurso recurso)
+        public async Task<IActionResult> Edit( int id, [Bind("Id,Descricao,Quantidade,Observacao")] Recurso recurso)
         {
-            if (id != recurso.Id)
-            {
-                return NotFound();
-            }
+            
 
             if (ModelState.IsValid)
             {
 
 
-                await _service.AtualizarRecurso(recurso);
+                await _serviceRecurso.AtualizarRecurso(recurso);
               
                 return RedirectToAction(nameof(Index));
             }
@@ -101,12 +104,12 @@ namespace IventarioDeRecursos.Controllers
         }
 
         // GET: Recursos/Delete/5
-        public async Task<IActionResult> Delete(Guid id)
+        public async Task<IActionResult> Delete(string id)
         {
 
 
 
-            var recurso = await _service.PegarRecurso(id);
+            var recurso = await _serviceRecurso.PegarRecurso(id);
           
             if (recurso == null)
             {
@@ -119,9 +122,16 @@ namespace IventarioDeRecursos.Controllers
         // POST: Recursos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        public async Task<IActionResult> DeleteConfirmed(string id,string txtName)
         {
-            await _service.DeletarRecurso(id);
+
+            var p = txtName;
+
+           var movimentacao= await _serviceMovimentacao.PegarMovimentacao(id, p);
+            
+            await _serviceRecurso.DeletarRecurso(id,p);
+
+            await _serviceMovimentacao.SaidaMovimentacao(movimentacao, p);
             
             return RedirectToAction(nameof(Index));
         }

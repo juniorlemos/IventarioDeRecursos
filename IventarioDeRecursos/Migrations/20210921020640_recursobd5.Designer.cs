@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IventarioDeRecursos.Migrations
 {
     [DbContext(typeof(RecursoContext))]
-    [Migration("20210913022551_RecursosDB2")]
-    partial class RecursosDB2
+    [Migration("20210921020640_recursobd5")]
+    partial class recursobd5
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,13 +21,34 @@ namespace IventarioDeRecursos.Migrations
                 .HasAnnotation("ProductVersion", "5.0.9")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("IventarioDeRecursos.Models.Movimentacao", b =>
+                {
+                    b.Property<string>("Descricao")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("DataEntrada")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataSaida")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NomeEntradaRecurso")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NomeSaidaRecurso")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Descricao");
+
+                    b.ToTable("Movimentacao");
+                });
+
             modelBuilder.Entity("IventarioDeRecursos.Models.Recurso", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Descricao")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("NomeResponsavel")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Observacao")
@@ -36,7 +57,7 @@ namespace IventarioDeRecursos.Migrations
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("Descricao");
 
                     b.ToTable("Recursos");
                 });

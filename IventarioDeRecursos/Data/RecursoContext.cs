@@ -15,6 +15,8 @@ namespace IventarioDeRecursos.Data
         }
 
         public DbSet<Recurso> Recursos { get; set; }
+
+        public DbSet<Movimentacao> Movimentacao { get; set; }
       
     }
 }

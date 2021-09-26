@@ -21,7 +21,7 @@ namespace IventarioDeRecursos.Repository
         public async Task AtualizarRecurso(Recurso recurso)
         {
 
-            var entry = _context.Recursos.First(e => e.Id == recurso.Id);
+            var entry = _context.Recursos.First(e => e.Descricao == recurso.Descricao) ;
             _context.Entry(entry).CurrentValues.SetValues(recurso);
 
             await _context.SaveChangesAsync();
@@ -30,7 +30,7 @@ namespace IventarioDeRecursos.Repository
         }
 
 
-        public async Task<Recurso> PegarRecurso(Guid recurso)
+        public async Task<Recurso> PegarRecurso(string recurso)
         {
          
                 return await _context.Recursos.FindAsync(recurso);
@@ -47,16 +47,23 @@ namespace IventarioDeRecursos.Repository
 
         public async Task InserirRecurso(Recurso recurso)
         {
-            _context.Add(recurso);
+            _context.Recursos.Add(recurso);
 
             await _context.SaveChangesAsync();
+           
         }
 
-        
-        public async Task DeletarRecurso(Guid id)
+
+       
+
+
+        public async Task DeletarRecurso(string id , string p)
         {
             var entidade = await _context.Recursos.FindAsync(id);
+
+    
             _context.Remove(entidade);
+
             await _context.SaveChangesAsync();
         }
 

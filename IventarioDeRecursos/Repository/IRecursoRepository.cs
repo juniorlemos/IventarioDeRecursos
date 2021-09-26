@@ -8,11 +8,11 @@ namespace IventarioDeRecursos.Repository
    public interface IRecursoRepository<TEntity> where TEntity : class
     {
 
-        Task DeletarRecurso(Guid id);
+        Task DeletarRecurso(string id ,string p);
         Task InserirRecurso(TEntity entidade);
         Task AtualizarRecurso(TEntity entidade);
         Task<List<TEntity>> PegarTodosOsRecursos();
-        Task<TEntity> PegarRecurso(Guid id);
-
+        Task<TEntity> PegarRecurso(string id);
+        
     }
 }

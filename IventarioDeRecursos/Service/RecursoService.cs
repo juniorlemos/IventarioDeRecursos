@@ -23,18 +23,24 @@ namespace IventarioDeRecursos.Service
 
         }
 
-        public  async Task DeletarRecurso(Guid id)
+        public  async Task DeletarRecurso(string id ,string p)
         {
-           await _repository.DeletarRecurso(id);
+           await _repository.DeletarRecurso(id ,p);
         }
 
         public async Task InserirRecurso(Recurso entidade)
         {
-            await _repository.InserirRecurso(entidade);
+        
+
+           await _repository.InserirRecurso(entidade);
+            
 
         }
 
-        public async Task<Recurso> PegarRecurso(Guid id)
+
+       
+
+        public async Task<Recurso> PegarRecurso(string id)
         {
             return await _repository.PegarRecurso(id);
 
