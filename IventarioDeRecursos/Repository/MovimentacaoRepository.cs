@@ -27,7 +27,7 @@ namespace IventarioDeRecursos.Repository
             }
 
 
-        public async Task<Movimentacao> PegarMovimentacao(string id, string p)
+        public async Task<Movimentacao> PegarMovimentacao(string id)
         {
             var entidade = await _context.Recursos.FindAsync(id);
             var movimentacao = await _context.Movimentacao.FindAsync(entidade.Descricao);
@@ -37,12 +37,12 @@ namespace IventarioDeRecursos.Repository
 
         }
 
-        public async Task AtualizarMovimentacao(Movimentacao movimento, string p)
+        public async Task AtualizarMovimentacao(Movimentacao movimento, string pessoaNome)
         {
            
            
             movimento.DataSaida = DateTime.Now;
-            movimento.NomeSaidaRecurso = p;
+            movimento.NomeSaidaRecurso = pessoaNome;
            
             await _context.SaveChangesAsync();
         }

@@ -23,9 +23,9 @@ namespace IventarioDeRecursos.Service
 
         }
 
-        public  async Task DeletarRecurso(string id ,string p)
+        public  async Task DeletarRecurso(string id )
         {
-           await _repository.DeletarRecurso(id ,p);
+           await _repository.DeletarRecurso(id );
         }
 
         public async Task InserirRecurso(Recurso entidade)

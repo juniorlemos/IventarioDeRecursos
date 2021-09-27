@@ -30,14 +30,14 @@ namespace IventarioDeRecursos.Service
             await _repository.InserirMovimento(movimento);
 
         }
-        public async Task<Movimentacao> PegarMovimentacao(string id, string p)
+        public async Task<Movimentacao> PegarMovimentacao(string id)
         {
-            return await _repository.PegarMovimentacao(id, p);
+            return await _repository.PegarMovimentacao(id);
         }
 
-        public async Task SaidaMovimentacao(Movimentacao movimento, string p)
+        public async Task SaidaMovimentacao(Movimentacao movimento, string pessoaNome)
         {
-            await _repository.AtualizarMovimentacao(movimento, p);
+            await _repository.AtualizarMovimentacao(movimento, pessoaNome);
         }
     }
 }

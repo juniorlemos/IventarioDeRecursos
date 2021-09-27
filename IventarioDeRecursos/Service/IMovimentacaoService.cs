@@ -9,8 +9,8 @@ namespace IventarioDeRecursos.Service
    public interface IMovimentacaoService<TEntity> where TEntity : class
     {
         Task InserirMovimentacao(Recurso entidade);
-        Task<TEntity> PegarMovimentacao(string id, string p);
-        Task SaidaMovimentacao(TEntity movimento, string p);
+        Task<TEntity> PegarMovimentacao(string id);
+        Task SaidaMovimentacao(TEntity movimento, string pessoaNome);
 
 
     }

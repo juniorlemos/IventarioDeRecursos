@@ -57,7 +57,7 @@ namespace IventarioDeRecursos.Repository
        
 
 
-        public async Task DeletarRecurso(string id , string p)
+        public async Task DeletarRecurso(string id )
         {
             var entidade = await _context.Recursos.FindAsync(id);
 

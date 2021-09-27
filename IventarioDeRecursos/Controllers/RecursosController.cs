@@ -125,13 +125,13 @@ namespace IventarioDeRecursos.Controllers
         public async Task<IActionResult> DeleteConfirmed(string id,string txtName)
         {
 
-            var p = txtName;
+            var pessoaNome = txtName;
 
-           var movimentacao= await _serviceMovimentacao.PegarMovimentacao(id, p);
+           var movimentacao= await _serviceMovimentacao.PegarMovimentacao(id);
             
-            await _serviceRecurso.DeletarRecurso(id,p);
+            await _serviceRecurso.DeletarRecurso(id);
 
-            await _serviceMovimentacao.SaidaMovimentacao(movimentacao, p);
+            await _serviceMovimentacao.SaidaMovimentacao(movimentacao, pessoaNome);
             
             return RedirectToAction(nameof(Index));
         }
