@@ -4,33 +4,49 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1 class="text-center text-success mb-5">Detalhes do Recurso</h1>
 
 <div>
-    <h4>Recurso</h4>
-    <hr />
+   
+    <hr class="success"/>
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descricao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descricao)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Quantidade)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Quantidade)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Observacao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Observacao)
-        </dd>
+
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4 shadow p-3 mb-5 bg-white rounded">
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Descricao)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Descricao)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Quantidade)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Quantidade)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Observacao)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Observacao)
+            </dd>
+            <dt class="col-sm-8">
+                @Html.DisplayNameFor(model => model.NomeResponsavel)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.NomeResponsavel)
+            </dd>
+            <div class="col-auto mt-5 ">
+
+                <a asp-action="Index" class="btn btn-secondary ">Voltar</a>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+        </div>
     </dl>
 </div>
-<div>
-   
-    <a asp-action="Index">Back to List</a>
-</div>
+

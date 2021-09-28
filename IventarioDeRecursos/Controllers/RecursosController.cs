@@ -57,6 +57,7 @@ namespace IventarioDeRecursos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Descricao,Quantidade,Observacao,NomeResponsavel")] Recurso recurso)
         {
+           
             if (ModelState.IsValid)
             {
                 
@@ -90,7 +91,7 @@ namespace IventarioDeRecursos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit( int id, [Bind("Id,Descricao,Quantidade,Observacao")] Recurso recurso)
         {
-            
+           
 
             if (ModelState.IsValid)
             {

@@ -73,3 +73,15 @@ body {
 .table tr:hover {
     cursor: pointer;
 }
+hr.danger {
+    border-top: 1px solid #d9534f;
+}
+hr.primary {
+    border-top: 1px solid #0275d8;
+}
+hr.warning {
+    border-top: 1px solid #f0ad4e;
+}
+hr.success {
+    border-top: 1px solid #5cb85c;
+}
