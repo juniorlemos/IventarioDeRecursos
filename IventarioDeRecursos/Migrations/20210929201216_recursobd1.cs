@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IventarioDeRecursos.Migrations
 {
-    public partial class recursoDb1 : Migration
+    public partial class recursobd1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,10 +13,9 @@ namespace IventarioDeRecursos.Migrations
                 {
                     MovimentacaoID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Recursoid = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NomeEntradaRecurso = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NomeSaidaRecurso = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NomeEntradaRecurso = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NomeSaidaRecurso = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DataEntrada = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DataSaida = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -29,17 +28,14 @@ namespace IventarioDeRecursos.Migrations
                 name: "Recursos",
                 columns: table => new
                 {
-                    RecursoID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Descricao = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Quantidade = table.Column<int>(type: "int", nullable: false),
-                    Observacao = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NomeResponsavel = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Entrada = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Observacao = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NomeResponsavel = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Recursos", x => x.RecursoID);
+                    table.PrimaryKey("PK_Recursos", x => x.Descricao);
                 });
         }
 

@@ -4,7 +4,8 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1 class="text-center text-warning mb-5" >Editar Recurso</h1>
+<h1 class="text-center text-warning mb-5" >Editar Recurso  </h1>
+
 
 
 <hr class="warning" />
@@ -12,36 +13,46 @@
     <div class="col-md-4">
     </div>
     <div class="col-md-4 shadow p-3 mb-5 bg-white rounded">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group">
-                <label asp-for="Descricao" class="control-label"></label>
-                <input asp-for="Descricao" class="form-control" />
-                <span asp-validation-for="Descricao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Quantidade" class="control-label"></label>
-                <input asp-for="Quantidade" class="form-control" />
-                <span asp-validation-for="Quantidade" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Observacao" class="control-label"></label>
-                <input asp-for="Observacao" class="form-control" />
-                <span asp-validation-for="Observacao" class="text-danger"></span>
-            </div>
-            <div class="row justify-content-between">
-                <div class="col-auto">
-                    <a asp-action="Index" class="btn btn-secondary">voltar</a>
-                </div>
-
-                <div class="form-group col-auto">
-                    <input type="submit" value="Salvar" class="btn btn-warning" />
-                </div>
-            </div>
         
-        </form>
-    </div>
+        <h5>    @Html.DisplayNameFor(model => model.Descricao) </h5>
+
+
+        <p class="mb-3"> @Html.DisplayFor(model => model.Descricao)</p>
+
+
+
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Descricao" />
+
+
+
+
+
+        <div class="form-group">
+            <label asp-for="Quantidade" class="control-label"></label>
+            <input asp-for="Quantidade" class="form-control" />
+            <span asp-validation-for="Quantidade" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Observacao" class="control-label"></label>
+            <input asp-for="Observacao" class="form-control" />
+            <span asp-validation-for="Observacao" class="text-danger"></span>
+        </div>
+
+        <div class="row justify-content-between">
+            <div class="col-auto">
+                <a asp-action="Index" class="btn btn-secondary">voltar</a>
+            </div>
+
+            <div class="form-group col-auto">
+                <input type="submit" value="Salvar" class="btn btn-warning" />
+            </div>
+        </div>
+
+    </form>
+</div>
 
     <div class="col-md-4">
     </div>

@@ -1,27 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace IventarioDeRecursos.Models
 {
     public class Movimentacao
     {
-        [Key]
+        
+        public int MovimentacaoID { get; set; }
+        
         [Display(Name = "Descrição")]
         [Required]
         public string Descricao { get; set; }
-        [Display(Name = "Responsável pela entrada do Recurso")]
+        [Display(Name = "Responsável pela entrada ")]
         [Required]
         public string NomeEntradaRecurso { get; set; }
-        [Display(Name = "Responsável pela saida do Recurso")]
+        [Display(Name = "Responsável pela saida ")]
         [Required]
         public string NomeSaidaRecurso { get; set; }
-        [Display(Name = "Data de Entrada do recurso")]
+        [Display(Name = "Data de Entrada ")]
         [Required]
         public DateTime DataEntrada { get; set; } = DateTime.Now;
-        [Display(Name = "Data de Saida do recurso")]
+        [Display(Name = "Data de Saida")]
         [Required]
         public DateTime DataSaida { get; set; }
 

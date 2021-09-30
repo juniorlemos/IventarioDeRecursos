@@ -1,5 +1,6 @@
 ﻿using IventarioDeRecursos.Data;
 using IventarioDeRecursos.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,15 +30,29 @@ namespace IventarioDeRecursos.Repository
 
         public async Task<Movimentacao> PegarMovimentacao(string id)
         {
-            var entidade = await _context.Recursos.FindAsync(id);
-            var movimentacao = await _context.Movimentacao.FindAsync(entidade.Descricao);
+           
 
-            return movimentacao;
+            //var entidade = await _context.Recursos.FindAsync(id);
+
+            var entidade =  _context.Recursos.First(e => e.Descricao == id);
+
+            //var movimentacao = await _context.Movimentacao.FindAsync(entidade.Descricao);
+            var movimentacao =  _context.Movimentacao.OrderByDescending(i =>i.MovimentacaoID).First(e => e.Descricao == entidade.Descricao);
+
+            
+
+            return  movimentacao;
 
 
         }
+        public async Task<List<Movimentacao>> PegarTodasMovimentacoes()
+        {
+           
+            return await _context.Movimentacao.AsNoTracking().OrderBy(d=>d.DataEntrada).ToListAsync();
+           
+        }
 
-        public async Task AtualizarMovimentacao(Movimentacao movimento, string pessoaNome)
+        public async Task AtualizarSaidaMovimentacao(Movimentacao movimento, string pessoaNome)
         {
            
            
@@ -47,7 +62,7 @@ namespace IventarioDeRecursos.Repository
             await _context.SaveChangesAsync();
         }
 
-
+       
 
     }
     }

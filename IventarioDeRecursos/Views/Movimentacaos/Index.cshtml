@@ -4,55 +4,56 @@
     ViewData["Title"] = "Index";
 }
 
-<h1 class="text-center">Movimentações</h1>
+<h1 class="text-center mb-5 ">Movimentações</h1>
 
 
-<table  id="tabelaMovimentacoes" class="table">
-    <thead>
+<table  id="tabelaMovimentacoes" class="table  table-bordered text-center table-hover">
+    <thead class="table-dark">
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DataEntrada)
+            </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.Descricao)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NomeEntradaRecurso)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NomeSaidaRecurso)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataEntrada)
-            </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.DataSaida)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeSaidaRecurso)
+            </th>
+
+
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Descricao)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NomeEntradaRecurso)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NomeSaidaRecurso)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DataEntrada)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DataSaida)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Descricao">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Descricao">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Descricao">Delete</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataEntrada)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeEntradaRecurso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataSaida)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeSaidaRecurso)
+            </td>
+
+
+        </tr>
         }
     </tbody>
 </table>

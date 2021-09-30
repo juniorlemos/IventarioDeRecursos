@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace IventarioDeRecursos.Repository
@@ -9,6 +7,8 @@ namespace IventarioDeRecursos.Repository
     {
         Task InserirMovimento(TEntity entidade);
         Task <TEntity>PegarMovimentacao(string id);
-        Task AtualizarMovimentacao(TEntity movimento, string pessoaNome);
+        Task<List<TEntity>> PegarTodasMovimentacoes();
+        Task AtualizarSaidaMovimentacao(TEntity movimento, string pessoaNome);
+       
     }
 }

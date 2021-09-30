@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using IventarioDeRecursos.Data;
-using IventarioDeRecursos.Models;
+﻿using IventarioDeRecursos.Models;
 using IventarioDeRecursos.Service;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace IventarioDeRecursos.Controllers
 {
@@ -30,6 +24,9 @@ namespace IventarioDeRecursos.Controllers
 
             return View(recursos);
         }
+
+        
+
 
         // GET: Recursos/Details/5
         public async Task<IActionResult> Details(string id)
@@ -60,15 +57,26 @@ namespace IventarioDeRecursos.Controllers
            
             if (ModelState.IsValid)
             {
+
                 
+                var rec = await _serviceRecurso.PegarRecurso(recurso.Descricao);
 
-               await _serviceRecurso.InserirRecurso(recurso);
+                if (rec == null) {
+                    await _serviceRecurso.InserirRecurso(recurso);
 
-                await _serviceMovimentacao.InserirMovimentacao(recurso);
+                    await _serviceMovimentacao.InserirMovimentacao(recurso);
+                    TempData["Mensagem"] = "sucesso";
 
-                return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Create));
+                }
+                
+                TempData["Mensagem"] = "erroChaveDuplicada";
+                return View();
+
+
             }
-            return View(recurso);
+            TempData["Mensagem"] = "erro";
+            return View();
         }
 
         // GET: Recursos/Edit/5
@@ -89,19 +97,20 @@ namespace IventarioDeRecursos.Controllers
        
      [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit( int id, [Bind("Id,Descricao,Quantidade,Observacao")] Recurso recurso)
+        public async Task<IActionResult> Edit( string id, [Bind("Quantidade,Observacao")] Recurso recurso)
         {
-           
 
-            if (ModelState.IsValid)
-            {
 
+
+            var recursoAntigo = await _serviceRecurso.PegarRecurso(id);
+
+            recurso.Descricao = recursoAntigo.Descricao;
+            recurso.NomeResponsavel = recursoAntigo.NomeResponsavel;
 
                 await _serviceRecurso.AtualizarRecurso(recurso);
-              
-                return RedirectToAction(nameof(Index));
-            }
-            return View(recurso);
+            TempData["Mensagem"] = "editadosucesso";
+            return RedirectToAction(nameof(Index));
+           
         }
 
         // GET: Recursos/Delete/5
@@ -128,14 +137,20 @@ namespace IventarioDeRecursos.Controllers
 
             var pessoaNome = txtName;
 
-           var movimentacao= await _serviceMovimentacao.PegarMovimentacao(id);
-            
+         
+
+            var movimentacao= await _serviceMovimentacao.PegarMovimentacao(id);
+
+           
             await _serviceRecurso.DeletarRecurso(id);
 
             await _serviceMovimentacao.SaidaMovimentacao(movimentacao, pessoaNome);
-            
+
+            TempData["Mensagem"] = "deletesucesso";
+
             return RedirectToAction(nameof(Index));
         }
+
 
         
     }

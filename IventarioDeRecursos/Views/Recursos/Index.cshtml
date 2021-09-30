@@ -6,6 +6,7 @@
 
 <h1 class="text-center">Recursos</h1>
 
+<span id="Mensagem" class="d-none">@TempData["Mensagem"]</span>
 
 
 <p>
@@ -42,7 +43,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Observacao)
                 </td>
-                <td>
+                <td class="text-right">
                     <a asp-action="Edit" asp-route-id="@item.Descricao" class="btn btn-outline-warning"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i> Editar</a>
                     <a asp-action="Details" asp-route-id="@item.Descricao" class="btn btn-outline-success"><i class="fa fa-info fa-lg" aria-hidden="true"></i> Detalhes</a>
                     <a asp-action="Delete" asp-route-id="@item.Descricao" class="btn btn-outline-danger"><i class="fa fa-minus-circle fa-lg"></i> Sacar</a>
@@ -55,30 +56,57 @@
 
 @section Scripts {
 
-    <script>
-    $(document).ready( function () {
-        $('#tabelaRecursos').DataTable({
-            "language": {
-                "emptyTable": "Nenhum recurso encontrado",
-                "search": ' <i class="fa fa-search fa-lg" aria-hidden="true"></i> </i> ',
-                "searchPlaceholder": 'Pesquisar',
-                "loadingRecords": "Carregando...",
-                "processing": "Processando...",
-                "zeroRecords": "Nenhum recurso encontrado",
-                "paginate": {
-                    "next": "Próximo",
-                    "previous": "Anterior",
-                    "first": "Primeiro",
-                    "last": "Último"
-                },
-            },
-            "lengthChange": false,
-            "ordering": false,
-            "bInfo": false,
-            
-          
-        });
-    });
 
-        </script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#tabelaRecursos').DataTable({
+                "language": {
+                    "emptyTable": "Nenhum recurso encontrado",
+                    "search": ' <i class="fa fa-search fa-lg" aria-hidden="true"></i> </i> ',
+                    "searchPlaceholder": 'Pesquisar',
+                    "loadingRecords": "Carregando...",
+                    "processing": "Processando...",
+                    "zeroRecords": "Nenhum recurso encontrado",
+                    "paginate": {
+                        "next": "Próximo",
+                        "previous": "Anterior",
+                        "first": "Primeiro",
+                        "last": "Último"
+                    },
+                },
+                "lengthChange": false,
+                "ordering": false,
+                "bInfo": false,
+
+
+            });
+        });
+
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+
+            var mensagem = $('#Mensagem').text();
+
+            switch (mensagem) {
+                case "deletesucesso":
+                    toastr.success("Recurso sacado com sucesso");
+                    break;
+                case "editadosucesso":
+                    toastr.success("Recurso editado com sucesso");
+                    break;
+               
+                default:
+            }
+        })
+
+    </script>
+
+
+
+
 }

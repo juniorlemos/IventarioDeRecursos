@@ -4,8 +4,14 @@
     ViewData["Title"] = "Create";
 }
 
+
+<span id="Mensagem" class="d-none">@TempData["Mensagem"]</span>
+
+
+
+
 <h1 class="text-center text-primary mb-5">Novo Recurso</h1>
-<hr class="primary"/>
+<hr class="primary" />
 
 
 
@@ -24,7 +30,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Quantidade" class="control-label"></label>
-                <input asp-for="Quantidade" class="form-control"  min="1" oninput="validity.valid||(value='');"/>
+                <input asp-for="Quantidade" class="form-control" min="1" oninput="validity.valid||(value='');" />
                 <span asp-validation-for="Quantidade" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -38,7 +44,7 @@
                 <input asp-for="NomeResponsavel" class="form-control" />
                 <span asp-validation-for="NomeResponsavel" class="text-danger"></span>
             </div>
-           
+
 
             <div class="row justify-content-between">
                 <div class="col-auto ">
@@ -65,4 +71,37 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    <script>
+        $(document).ready(function () {
+
+     
+
+
+        var mensagem = $('#Mensagem').text();
+
+        switch (mensagem) {
+            case "sucesso":
+                toastr.success("Recurso criado com sucesso");
+                break;
+            case "erro":
+                toastr.error("Erro no cadastro , não foi possivel cadastrar o seu Recurso ,tente novamente");
+                break;
+            case "erroChaveDuplicada":
+                toastr.error("Erro no cadastro , um recurso com esse nome ja foi cadastrado tente com um nome diferente");
+                break;
+            default:
+        }
+        })
+
+    </script>
+
+
+
+  
+
 }
+
+
+

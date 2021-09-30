@@ -19,10 +19,11 @@ a {
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
+  color: red;
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -59,8 +60,9 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    background: #F0F8FF !important;
 }
 .footer {
   position: absolute;
@@ -84,4 +86,8 @@ hr.warning {
 }
 hr.success {
     border-top: 1px solid #5cb85c;
+}
+
+.gradiente {
+    background: linear-gradient(to bottom, #38afc1 30%, #38c1ad 70%);
 }

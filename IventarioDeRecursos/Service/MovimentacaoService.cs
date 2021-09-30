@@ -24,6 +24,8 @@ namespace IventarioDeRecursos.Service
             {
                 Descricao = entidade.Descricao,
                 NomeEntradaRecurso = entidade.NomeResponsavel,
+                NomeSaidaRecurso="",
+               
 
             };
 
@@ -35,9 +37,18 @@ namespace IventarioDeRecursos.Service
             return await _repository.PegarMovimentacao(id);
         }
 
+        public async Task<List<Movimentacao>> PegarTodasMovimentacoes()
+        {
+
+            return await _repository.PegarTodasMovimentacoes();
+        }
+
         public async Task SaidaMovimentacao(Movimentacao movimento, string pessoaNome)
         {
-            await _repository.AtualizarMovimentacao(movimento, pessoaNome);
+            await _repository.AtualizarSaidaMovimentacao(movimento, pessoaNome);
         }
+
+       
+
     }
 }

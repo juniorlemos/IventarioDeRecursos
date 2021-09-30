@@ -21,8 +21,10 @@ namespace IventarioDeRecursos.Migrations
 
             modelBuilder.Entity("IventarioDeRecursos.Models.Movimentacao", b =>
                 {
-                    b.Property<string>("Descricao")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("MovimentacaoID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DataEntrada")
                         .HasColumnType("datetime2");
@@ -30,13 +32,19 @@ namespace IventarioDeRecursos.Migrations
                     b.Property<DateTime>("DataSaida")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("NomeEntradaRecurso")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NomeSaidaRecurso")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Descricao");
+                    b.HasKey("MovimentacaoID");
 
                     b.ToTable("Movimentacao");
                 });
@@ -44,12 +52,15 @@ namespace IventarioDeRecursos.Migrations
             modelBuilder.Entity("IventarioDeRecursos.Models.Recurso", b =>
                 {
                     b.Property<string>("Descricao")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("NomeResponsavel")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Observacao")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Quantidade")

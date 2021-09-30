@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IventarioDeRecursos.Migrations
 {
     [DbContext(typeof(RecursoContext))]
-    [Migration("20210917035424_recursoDb1")]
-    partial class recursoDb1
+    [Migration("20210929201216_recursobd1")]
+    partial class recursobd1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,15 +35,15 @@ namespace IventarioDeRecursos.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Descricao")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NomeEntradaRecurso")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NomeSaidaRecurso")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Recursoid")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("MovimentacaoID");
@@ -53,27 +53,22 @@ namespace IventarioDeRecursos.Migrations
 
             modelBuilder.Entity("IventarioDeRecursos.Models.Recurso", b =>
                 {
-                    b.Property<int>("RecursoID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<string>("Descricao")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Entrada")
-                        .HasColumnType("datetime2");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("NomeResponsavel")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Observacao")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
-                    b.HasKey("RecursoID");
+                    b.HasKey("Descricao");
 
                     b.ToTable("Recursos");
                 });

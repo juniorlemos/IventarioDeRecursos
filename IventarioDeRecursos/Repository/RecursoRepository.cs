@@ -1,7 +1,6 @@
 ﻿using IventarioDeRecursos.Data;
 using IventarioDeRecursos.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,7 +19,7 @@ namespace IventarioDeRecursos.Repository
 
         public async Task AtualizarRecurso(Recurso recurso)
         {
-
+           
             var entry = _context.Recursos.First(e => e.Descricao == recurso.Descricao) ;
             _context.Entry(entry).CurrentValues.SetValues(recurso);
 
@@ -40,7 +39,7 @@ namespace IventarioDeRecursos.Repository
         public async Task<List<Recurso>> PegarTodosOsRecursos()
         {
 
-            return await _context.Recursos.ToListAsync();
+            return await _context.Recursos.AsNoTracking().ToListAsync();
 
         }
         

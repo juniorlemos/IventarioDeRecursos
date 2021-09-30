@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace IventarioDeRecursos.Repository
 {
-   public interface IRecursoRepository<TEntity> where TEntity : class
+    public interface IRecursoRepository<TEntity> where TEntity : class
     {
 
         Task DeletarRecurso(string id );
